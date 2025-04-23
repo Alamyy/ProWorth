@@ -6,9 +6,9 @@ from io import BytesIO
 import requests
 
 # Load data
-new_predictions = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/predicted_market_values_2026.csv?token=GHSAT0AAAAAADCXJLASW5RSME3JAVPMWSL62AJJCPQ")
-players = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/merged_df.csv?token=GHSAT0AAAAAADCXJLATBRKJXEGGXDZAGY3U2AJJDFQ")
-more_info = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/players.csv?token=GHSAT0AAAAAADCXJLAT57PDJCW4FGXBSNM42AJJDMQ")
+new_predictions = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/predicted_market_values_2026.csv")
+players = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/merged_df.csv")
+more_info = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/players.csv")
 
 # Merge datasets
 df = pd.merge(new_predictions, players, on='player_id', how='left')
