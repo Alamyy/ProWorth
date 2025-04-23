@@ -48,7 +48,7 @@ if player_name_input != "-- Select a Player --":
         ]
 
         # Plot
-        plt.style.use("seaborn-darkgrid")
+        plt.style.use("ggplot")  # Use a matplotlib style, e.g., 'ggplot'
         fig, ax = plt.subplots(figsize=(12, 6))
 
         # Actual values
