@@ -169,11 +169,15 @@ if page == "Player Analyzer":
 
 # ---------------------- Top Market Values Page ----------------------
 elif page == "Top Market Values 2026":
-    st.markdown("<h1 style='text-align: center; color: #D35400;'>Top 20 Players by Predicted Market Value (2026)</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #D35400;'>Top Players by Predicted Market Value (2026)</h1>", unsafe_allow_html=True)
     
-    top_players = df.sort_values(by="predicted_value_2026", ascending=False).dropna(subset=["name_x"]).head(20)
+    # Slider to choose number of players to show
+    num_players = st.slider("Select Number of Players to Display", min_value=1, max_value=100, value=20, step=1)
+
+    # Sort and display top players
+    top_players = df.sort_values(by="predicted_value_2026", ascending=False).dropna(subset=["name_x"]).head(num_players)
     
-        # Create the table and make player names clickable
+    # Create the table and make player names clickable
     top_players_display = top_players[['name_x', 'current_club_name', 'sub_position', 'value_2024', 'predicted_value_2026']].rename(columns={
         'name_x': 'Player',
         'current_club_name': 'Club',
@@ -190,4 +194,5 @@ elif page == "Top Market Values 2026":
     top_players_display = top_players_display[['Player', 'Club', 'Position', 'Current Value (€)', 'Predicted Value (€)']]
     top_players_display = top_players_display.reset_index(drop=True)
     
+    # Display the table
     st.markdown(top_players_display.to_html(escape=False), unsafe_allow_html=True)
