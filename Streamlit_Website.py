@@ -19,6 +19,9 @@ st.set_page_config(page_title="Football Market Value", layout="wide")
 st.sidebar.title("⚽ Navigation")
 page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026", "Club Market Value Analysis"])
 
+import streamlit as st
+import pandas as pd
+
 # ---------------------- Club Market Value Analysis Page ----------------------
 if page == "Club Market Value Analysis":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>📊 Market Value Analysis by Club</h1>", unsafe_allow_html=True)
@@ -53,9 +56,19 @@ if page == "Club Market Value Analysis":
             sub_positions = club_players['sub_position'].dropna().unique()
             sub_position_selected = st.selectbox("Select a Position", ["-- Select a Position --"] + sorted(sub_positions))
 
+            # Select market value trend filter (increase or decrease)
+            market_trend_filter = st.selectbox("Select Market Value Trend", ["-- Select Trend --", "Increase", "Decrease"])
+
         # Filter by sub_position if selected
         if sub_position_selected != "-- Select a Position --":
             club_players = club_players[club_players['sub_position'] == sub_position_selected]
+
+        # Filter by market value trend (Increase/Decrease) if selected
+        if market_trend_filter != "-- Select Trend --":
+            if market_trend_filter == "Increase":
+                club_players = club_players[club_players['predicted_value_2026'] > club_players['value_2024']]
+            elif market_trend_filter == "Decrease":
+                club_players = club_players[club_players['predicted_value_2026'] < club_players['value_2024']]
 
         # Display Players and Market Value Changes
         st.subheader(f"Players from {club_selected}")
