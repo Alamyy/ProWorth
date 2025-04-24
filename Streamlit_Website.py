@@ -86,10 +86,11 @@ elif page == "Top Market Values 2026":
     top_players = df.sort_values(by="predicted_value_2026", ascending=False).dropna(subset=["name_x"]).head(20)
     
     # Create the table and make player names clickable
-    top_players_display = top_players[['name_x', 'current_club_name', 'sub_position', 'predicted_value_2026']].rename(columns={
+    top_players_display = top_players[['name_x', 'current_club_name', 'sub_position', 'predicted_value_2026','value_2024']].rename(columns={
         'name_x': 'Player',
         'current_club_name': 'Club',
         'sub_position': 'Position',
+        'value_2024':'Current Value'
         'predicted_value_2026': 'Predicted Value (€)'
     })
     
