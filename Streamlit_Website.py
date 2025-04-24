@@ -19,7 +19,12 @@ df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='pla
 st.set_page_config(page_title="Football Data Analysis", layout="centered")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.selectbox("Select a Page", ["Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
+page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
+# ---------------------- Home Page ----------------------
+if page == "Home":
+    st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis 🏆</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>This application allows you to analyze football data with various tools. Choose one of the options below to get started:</p>", unsafe_allow_html=True)
 
 # ---------------------- Club Market Value Analysis Page ----------------------
 if page == "Club Market Value Analysis":
