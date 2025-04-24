@@ -14,12 +14,12 @@ df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='pla
 
 # Config
 st.set_page_config(page_title="Football Market Value", layout="wide")
-st.sidebar.title("⚽ Navigation")
+st.sidebar.title(" Navigation")
 page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026"])
 
 # ---------------------- Player Analyzer Page ----------------------
 if page == "Player Analyzer":
-    st.markdown("<h1 style='text-align: center; color: #2E86C1;'>⚽ Football Player Market Value Analyzer</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #2E86C1;'> Football Player Market Value Analyzer</h1>", unsafe_allow_html=True)
 
     player_names = df['name_x'].dropna().unique()
     player_name_input = st.selectbox("🔍 Search for a Player", ["-- Select a Player --"] + sorted(player_names))
@@ -81,7 +81,7 @@ if page == "Player Analyzer":
 
 # ---------------------- Top Market Values Page ----------------------
 elif page == "Top Market Values 2026":
-    st.markdown("<h1 style='text-align: center; color: #D35400;'>🔥 Top 20 Players by Predicted Market Value (2026)</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #D35400;'>Top 20 Players by Predicted Market Value (2026)</h1>", unsafe_allow_html=True)
     
     top_players = df.sort_values(by="predicted_value_2026", ascending=False).dropna(subset=["name_x"]).head(20)
     
