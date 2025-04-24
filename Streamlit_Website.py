@@ -86,10 +86,10 @@ elif page == "Top Market Values 2026":
     top_players = df.sort_values(by="predicted_value_2026", ascending=False).dropna(subset=["name_x"]).head(20)
     selected_top_player = st.selectbox("🎖️ Choose a Top Player", top_players['name_x'])
 
-    st.dataframe(top_players[['name_x', 'current_club_name', 'position', 'predicted_value_2026']].rename(columns={
+    st.dataframe(top_players[['name_x', 'current_club_name', 'sub_position', 'predicted_value_2026']].rename(columns={
         'name_x': 'Player',
         'current_club_name': 'Club',
-        'position': 'Position',
+        'sub_position': 'Position',
         'predicted_value_2026': 'Predicted Value (€)'
     }).style.format({'Predicted Value (€)': '€{:,.0f}'}), use_container_width=True)
 
