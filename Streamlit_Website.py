@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
-
+# Set the page title and layout
+st.set_page_config(page_title="Football Data Analysis", layout="centered")
 # Load data
 new_predictions = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/predicted_market_values_2026.csv")
 players = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/merged_df_2026.csv")
@@ -13,16 +14,11 @@ logo_clubs = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs
 df = pd.merge(new_predictions, players, on='player_id', how='left')
 df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='player_id', how='left')
 
-
 # Config
 st.set_page_config(page_title="Football Market Value", layout="wide")
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026", "Club Market Value Analysis"])
 
-import streamlit as st
-
-# Set the page title and layout
-st.set_page_config(page_title="Football Data Analysis", layout="centered")
 
 # Add a cool header
 st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis 🏆</h1>", unsafe_allow_html=True)
