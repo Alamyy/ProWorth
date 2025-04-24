@@ -21,10 +21,10 @@ page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026
 if page == "Player Analyzer":
     st.markdown("<h1 style='text-align: center; color: #2E86C1;'>⚽ Football Player Market Value Analyzer</h1>", unsafe_allow_html=True)
 
-    # Get the player's name from the query parameter using st.query_params
-    player_name_input = st.query_params.get("player", [None])[0]
-    
-    if player_name_input:
+    player_names = df['name_x'].dropna().unique()
+    player_name_input = st.selectbox("🔍 Search for a Player", ["-- Select a Player --"] + sorted(player_names))
+
+    if player_name_input != "-- Select a Player --":
         player_data = df[df['name_x'] == player_name_input]
         if not player_data.empty:
             player_data = player_data.iloc[0]
@@ -75,6 +75,7 @@ if page == "Player Analyzer":
             st.markdown(f"- **Highest Market Value:** €{player_info['highest_market_value_in_eur'] / 1e6:.2f}M")
         else:
             st.error("❌ Player not found.")
+
     else:
         st.info("👈 Please select a player to get started.")
 
