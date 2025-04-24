@@ -17,9 +17,15 @@ df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='pla
 
 # Config
 st.set_page_config(page_title="Football Data Analysis", layout="centered")
+
+# Initialize session state to store the current page (if it doesn't exist)
+if 'page' not in st.session_state:
+    st.session_state.page = "Home"
+
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 
+st.session_state.page = page
 # -------------------- Home Page --------------------
 if page == "Home":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis 🏆</h1>", unsafe_allow_html=True)
