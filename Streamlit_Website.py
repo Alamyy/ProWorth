@@ -85,18 +85,24 @@ elif page == "Top Market Values 2026":
     
     top_players = df.sort_values(by="predicted_value_2026", ascending=False).dropna(subset=["name_x"]).head(20)
     
-    # Create the table and make player names clickable
-    top_players_display = top_players[['name_x', 'current_club_name', 'sub_position', 'predicted_value_2026','value_2024']].rename(columns={
+        # Create the table and make player names clickable
+    top_players_display = top_players[['name_x', 'current_club_name', 'sub_position', 'value_2024', 'predicted_value_2026']].rename(columns={
         'name_x': 'Player',
         'current_club_name': 'Club',
         'sub_position': 'Position',
-        'value_2024':'Current Value',
+        'value_2024': 'Current Value (€)',
         'predicted_value_2026': 'Predicted Value (€)'
     })
     
-    # Format the Predicted Value in millions
+    # Format the Current Value and Predicted Value in millions
+    top_players_display['Current Value (€)'] = top_players_display['Current Value (€)'].apply(lambda x: f"€{x/1e6:.1f}M")
     top_players_display['Predicted Value (€)'] = top_players_display['Predicted Value (€)'].apply(lambda x: f"€{x/1e6:.1f}M")
     
+    # Reorder columns to place Current Value before Predicted Value
+    top_players_display = top_players_display[['Player', 'Club', 'Position', 'Current Value (€)', 'Predicted Value (€)']]
+    
     # Create clickable links for player names
+    top_players_display['Player'] = top_players_display['Player'].apply(lambda x: f"<a href='/?page=Player%20Analyzer&player={x}'>{x}</a>")
+        # Create clickable links for player names
     
     st.markdown(top_players_display.to_html(escape=False), unsafe_allow_html=True)
