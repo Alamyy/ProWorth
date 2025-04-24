@@ -95,7 +95,7 @@ if page == "Club Market Value Analysis":
         no_change_count = club_players[club_players['Market Value Trend'] == 'No Change'].shape[0]
 
         # Display counts of increases, decreases, and no changes
-        st.markdown(f"### 📈 Market Value Change Trend")
+        st.markdown(f"### Market Value Change Trend")
         st.markdown(f"- **Players with Increased Value**: {increase_count}")
         st.markdown(f"- **Players with Decreased Value**: {decrease_count}")
         st.markdown(f"- **Players with No Change in Value**: {no_change_count}")
