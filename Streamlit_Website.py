@@ -30,10 +30,19 @@ if page == "Club Market Value Analysis":
         # Filter players from the selected club
         club_players = df[df['current_club_name'] == club_selected]
 
+        # Select sub_position (optional filter)
+        sub_positions = club_players['sub_position'].dropna().unique()
+        sub_position_selected = st.selectbox("Select a Position", ["-- Select a Position --"] + sorted(sub_positions))
+
+        # Filter by sub_position if selected
+        if sub_position_selected != "-- Select a Position --":
+            club_players = club_players[club_players['sub_position'] == sub_position_selected]
+
         # Display Players and Market Value Changes
         st.subheader(f"Players from {club_selected}")
-        club_players_display = club_players[['name_x', 'value_2024', 'predicted_value_2026']].rename(columns={
+        club_players_display = club_players[['name_x', 'sub_position', 'value_2024', 'predicted_value_2026']].rename(columns={
             'name_x': 'Player',
+            'sub_position': 'Position',
             'value_2024': 'Current Value (€)',
             'predicted_value_2026': 'Predicted Value (€)'
         })
@@ -67,7 +76,6 @@ if page == "Club Market Value Analysis":
     
     else:
         st.info("👈 Please select a club to get started.")
-
 # ---------------------- Player Analyzer Page ----------------------
 if page == "Player Analyzer":
     st.markdown("<h1 style='text-align: center; color: #2E86C1;'> Football Player Market Value Analyzer</h1>", unsafe_allow_html=True)
