@@ -27,6 +27,7 @@ page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club M
 
 st.session_state.page = page
 # -------------------- Home Page --------------------
+# -------------------- Home Page --------------------
 if st.session_state.page == "Home":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis 🏆</h1>", unsafe_allow_html=True)
     
@@ -37,12 +38,15 @@ if st.session_state.page == "Home":
     # Buttons to navigate to other pages
     if st.button("Go to Player Analyzer"):
         st.session_state.page = "Player Analyzer"  # Update the page in session state
+        st.experimental_rerun()  # Manually trigger a rerun to update the page content
 
     if st.button("Go to Club Market Value Analysis"):
         st.session_state.page = "Club Market Value Analysis"
+        st.experimental_rerun()  # Manually trigger a rerun to update the page content
 
     if st.button("Go to Top Market Values 2026"):
         st.session_state.page = "Top Market Values 2026"
+        st.experimental_rerun()  # Manually trigger a rerun to update the page content
 
 # ---------------------- Club Market Value Analysis Page ----------------------
 if page == "Club Market Value Analysis":
