@@ -18,45 +18,28 @@ df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='pla
 # Config
 st.set_page_config(page_title="Football Data Analysis", layout="centered")
 st.sidebar.title("Navigation")
-page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026", "Club Market Value Analysis"])
+page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 
-# Add a cool header
-st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis 🏆</h1>", unsafe_allow_html=True)
+# -------------------- Home Page --------------------
+if page == "Home":
+    st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis 🏆</h1>", unsafe_allow_html=True)
+    
+    st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
+    
+    st.markdown("<p style='text-align: center;'>This application allows you to analyze football data with various tools. Choose one of the options below to get started:</p>", unsafe_allow_html=True)
 
-# Add some spacing
-st.markdown("<br>"*2, unsafe_allow_html=True)
+    # Buttons to navigate to other pages
+    if st.button("Go to Player Analyzer"):
+        st.session_state.page = "Player Analyzer"  # You can use session_state to control page navigation
+        st.experimental_rerun()  # Forces the page to reload and show the selected page
 
-# Add an introduction section
-st.markdown(
-    """
-    <h3 style='text-align: center;'>Explore football data insights, market values, player predictions, and more!</h3>
-    <p style='text-align: center;'>Choose the option that suits your interest:</p>
-    """, unsafe_allow_html=True)
-
-# Navigation buttons
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    if st.button("Club Market Value Analysis"):
+    if st.button("Go to Club Market Value Analysis"):
         st.session_state.page = "Club Market Value Analysis"
+        st.experimental_rerun()
 
-with col2:
-    if st.button("Top Market Values 2026"):
+    if st.button("Go to Top Market Values 2026"):
         st.session_state.page = "Top Market Values 2026"
-
-with col3:
-    if st.button("Player Analysis"):
-        st.session_state.page = "Player Analysis"
-
-# Optional: Add a footer with additional links
-st.markdown("<br>"*2, unsafe_allow_html=True)
-st.markdown(
-    """
-    <footer style="text-align: center;">
-        <p>Created by Your Name</p>
-        <p><a href="https://www.yourwebsite.com" target="_blank">Visit my portfolio</a></p>
-    </footer>
-    """, unsafe_allow_html=True)
+        st.experimental_rerun()
 
 
 # ---------------------- Club Market Value Analysis Page ----------------------
