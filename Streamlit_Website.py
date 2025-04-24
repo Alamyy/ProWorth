@@ -7,10 +7,12 @@ from PIL import Image
 new_predictions = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/predicted_market_values_2026.csv")
 players = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/merged_df_2026.csv")
 more_info = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/players.csv")
+logo_clubs = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/logo_clubs.csv")
 
 # Merge datasets
 df = pd.merge(new_predictions, players, on='player_id', how='left')
 df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='player_id', how='left')
+
 
 # Config
 st.set_page_config(page_title="Football Market Value", layout="wide")
@@ -27,6 +29,14 @@ if page == "Club Market Value Analysis":
     club_selected = st.selectbox("Select a Club", ["-- Select a Club --"] + sorted(clubs))
 
     if club_selected != "-- Select a Club --":
+        # Merge with logo_clubs DataFrame to get the club logo
+        club_logo = logo_clubs[logo_clubs['current_club_name'] == club_selected]['logo_url'].values
+        if club_logo.size > 0:
+            club_logo_url = club_logo[0]
+            st.image(club_logo_url, width=100)  # Display the club logo
+        else:
+            st.warning("Logo not found for the selected club.")
+
         # Filter players from the selected club
         club_players = df[df['current_club_name'] == club_selected]
 
