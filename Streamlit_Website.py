@@ -20,6 +20,9 @@ st.sidebar.title("⚽ Navigation")
 page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026", "Club Market Value Analysis"])
 
 
+import streamlit as st
+import pandas as pd
+
 # ---------------------- Club Market Value Analysis Page ----------------------
 if page == "Club Market Value Analysis":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>📊 Market Value Analysis by Club</h1>", unsafe_allow_html=True)
@@ -80,12 +83,17 @@ if page == "Club Market Value Analysis":
         st.markdown(f"- **Players with No Change in Value**: {no_change_count}")
 
         # Optional: Show a pie chart for market value trends
-        trend_counts = {'Increase': increase_count, 'Decrease': decrease_count, 'No Change': no_change_count}
+        trend_counts = pd.DataFrame({
+            'Trend': ['Increase', 'Decrease', 'No Change'],
+            'Count': [increase_count, decrease_count, no_change_count]
+        })
+
         st.write("### 📊 Market Value Trend Distribution")
-        st.bar_chart(trend_counts)
-    
+        st.bar_chart(trend_counts.set_index('Trend')['Count'])
+
     else:
         st.info("👈 Please select a club to get started.")
+
 # ---------------------- Player Analyzer Page ----------------------
 if page == "Player Analyzer":
     st.markdown("<h1 style='text-align: center; color: #2E86C1;'> Football Player Market Value Analyzer</h1>", unsafe_allow_html=True)
