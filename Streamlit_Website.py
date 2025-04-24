@@ -97,6 +97,5 @@ elif page == "Top Market Values 2026":
     top_players_display['Predicted Value (€)'] = top_players_display['Predicted Value (€)'].apply(lambda x: f"€{x/1e6:.1f}M")
     
     # Create clickable links for player names
-    top_players_display['Player'] = top_players_display['Player'].apply(lambda x: f"<a href='/?page=Player%20Analyzer&player={x}'>{x}</a>")
     
     st.markdown(top_players_display.to_html(escape=False), unsafe_allow_html=True)
