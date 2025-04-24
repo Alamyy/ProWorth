@@ -21,23 +21,70 @@ st.set_page_config(page_title="Football Data Analysis", layout="centered")
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 
+# Custom HTML & CSS for the navigation bar
+st.markdown("""
+    <style>
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            padding: 10px 0;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .navbar a:hover {
+            background-color: #D35400;
+            color: white;
+        }
+        .navbar a.active {
+            background-color: #D35400;
+            color: white;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
-# -------------------- Home Page --------------------
+# Add the navigation bar with links
+st.markdown("""
+    <div class="navbar">
+        <a href="#" class="active" id="home-link">Home</a>
+        <a href="#" id="player-analyzer-link">Player Analyzer</a>
+        <a href="#" id="club-market-value-link">Club Market Value Analysis</a>
+        <a href="#" id="top-market-values-link">Top Market Values 2026</a>
+    </div>
+""", unsafe_allow_html=True)
+
+# -------------------- Page Navigation --------------------
 if 'page' not in st.session_state:
     st.session_state.page = "Home"  # Initialize page state
 
-# Add a dropdown or radio button for page selection
-page = st.radio("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
+# Set page based on link clicked
+clicked_page = st.button("Home")
+if clicked_page:
+    st.session_state.page = "Home"
 
-# Update the session state with the selected page
-st.session_state.page = page
+clicked_page = st.button("Player Analyzer")
+if clicked_page:
+    st.session_state.page = "Player Analyzer"
+
+clicked_page = st.button("Club Market Value Analysis")
+if clicked_page:
+    st.session_state.page = "Club Market Value Analysis"
+
+clicked_page = st.button("Top Market Values 2026")
+if clicked_page:
+    st.session_state.page = "Top Market Values 2026"
 
 # -------------------- Home Page Content --------------------
 if st.session_state.page == "Home":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis 🏆</h1>", unsafe_allow_html=True)
-    
     st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
-    
     st.markdown("<p style='text-align: center;'>This application allows you to analyze football data with various tools. Choose one of the options below to get started:</p>", unsafe_allow_html=True)
 
 # ---------------------- Club Market Value Analysis Page ----------------------
