@@ -90,7 +90,7 @@ elif page == "Top Market Values 2026":
         'name_x': 'Player',
         'current_club_name': 'Club',
         'sub_position': 'Position',
-        'value_2024':'Current Value'
+        'value_2024':'Current Value',
         'predicted_value_2026': 'Predicted Value (€)'
     })
     
