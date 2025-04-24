@@ -21,8 +21,8 @@ page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026
 if page == "Player Analyzer":
     st.markdown("<h1 style='text-align: center; color: #2E86C1;'>⚽ Football Player Market Value Analyzer</h1>", unsafe_allow_html=True)
 
-    # Get the player's name from the query parameter
-    player_name_input = st.experimental_get_query_params().get("player", [None])[0]
+    # Get the player's name from the query parameter using st.query_params
+    player_name_input = st.query_params.get("player", [None])[0]
     
     if player_name_input:
         player_data = df[df['name_x'] == player_name_input]
