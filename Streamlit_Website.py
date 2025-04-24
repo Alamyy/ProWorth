@@ -14,8 +14,59 @@ df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='pla
 
 # Config
 st.set_page_config(page_title="Football Market Value", layout="wide")
-st.sidebar.title(" Navigation")
-page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026"])
+st.sidebar.title("⚽ Navigation")
+page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026", "Club Market Value Analysis"])
+
+
+# ---------------------- Club Market Value Analysis Page ----------------------
+if page == "Club Market Value Analysis":
+    st.markdown("<h1 style='text-align: center; color: #D35400;'>📊 Market Value Analysis by Club</h1>", unsafe_allow_html=True)
+
+    # Select club
+    clubs = df['current_club_name'].dropna().unique()
+    club_selected = st.selectbox("Select a Club", ["-- Select a Club --"] + sorted(clubs))
+
+    if club_selected != "-- Select a Club --":
+        # Filter players from the selected club
+        club_players = df[df['current_club_name'] == club_selected]
+
+        # Display Players and Market Value Changes
+        st.subheader(f"Players from {club_selected}")
+        club_players_display = club_players[['name_x', 'value_2024', 'predicted_value_2026']].rename(columns={
+            'name_x': 'Player',
+            'value_2024': 'Current Value (€)',
+            'predicted_value_2026': 'Predicted Value (€)'
+        })
+
+        # Format the values in millions
+        club_players_display['Current Value (€)'] = club_players_display['Current Value (€)'].apply(lambda x: f"€{x/1e6:.1f}M")
+        club_players_display['Predicted Value (€)'] = club_players_display['Predicted Value (€)'].apply(lambda x: f"€{x/1e6:.1f}M")
+
+        # Display table
+        st.dataframe(club_players_display)
+
+        # Determine players with increased or decreased predicted value
+        club_players['Market Value Change'] = club_players['predicted_value_2026'] - club_players['value_2024']
+        club_players['Market Value Trend'] = club_players['Market Value Change'].apply(lambda x: 'Increase' if x > 0 else ('Decrease' if x < 0 else 'No Change'))
+
+        # Count number of players going up or down
+        increase_count = club_players[club_players['Market Value Trend'] == 'Increase'].shape[0]
+        decrease_count = club_players[club_players['Market Value Trend'] == 'Decrease'].shape[0]
+        no_change_count = club_players[club_players['Market Value Trend'] == 'No Change'].shape[0]
+
+        # Display counts of increases, decreases, and no changes
+        st.markdown(f"### 📈 Market Value Change Trend")
+        st.markdown(f"- **Players with Increased Value**: {increase_count}")
+        st.markdown(f"- **Players with Decreased Value**: {decrease_count}")
+        st.markdown(f"- **Players with No Change in Value**: {no_change_count}")
+
+        # Optional: Show a pie chart for market value trends
+        trend_counts = {'Increase': increase_count, 'Decrease': decrease_count, 'No Change': no_change_count}
+        st.write("### 📊 Market Value Trend Distribution")
+        st.bar_chart(trend_counts)
+    
+    else:
+        st.info("👈 Please select a club to get started.")
 
 # ---------------------- Player Analyzer Page ----------------------
 if page == "Player Analyzer":
