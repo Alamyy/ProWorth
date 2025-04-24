@@ -19,7 +19,7 @@ df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='pla
 st.set_page_config(page_title="Football Data Analysis", layout="centered")
 
 st.sidebar.title("Navigation")
-page = st.sidebar.selectbox("Select a Page", ["Video Page","Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
+page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 
 # Home page content ----------------------------------------------
 if page == "Home":
