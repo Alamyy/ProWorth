@@ -33,31 +33,26 @@ st.markdown(
     .stApp {{
         position: relative;
         overflow: hidden;
+        height: 100vh;
     }}
-    .stApp::before {{
-        content: "";
+    .video-background {{
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -1;
-        background: url("{video_url}");
-        background-size: cover;
-        background-position: center;
-        opacity: 0.7;
-    }}
-    video {{
-        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        z-index: -2;
+        z-index: -1;
+    }}
+    .content {{
+        position: relative;
+        z-index: 1;
+        color: white;  /* White text color */
+        text-align: center;
+        padding-top: 50px;
     }}
     </style>
-    <video autoplay muted loop>
+    <video class="video-background" autoplay muted loop>
         <source src="{video_url}" type="video/mp4">
     </video>
     """,
@@ -66,9 +61,11 @@ st.markdown(
 
 # Home page content
 if page == "Home":
-    st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis </h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center;'>This application allows you to analyze football data with various tools. Choose one of the options in the navigation bar to get started:</p>", unsafe_allow_html=True)
+    st.markdown("<div class='content'>", unsafe_allow_html=True)
+    st.markdown("<h1 style='color: #D35400;'>Welcome to the Football Data Analysis </h1>", unsafe_allow_html=True)
+    st.markdown("<h3>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
+    st.markdown("<p>This application allows you to analyze football data with various tools. Choose one of the options in the navigation bar to get started:</p>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # ---------------------- Club Market Value Analysis Page ----------------------
 if page == "Club Market Value Analysis":
