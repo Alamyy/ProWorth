@@ -16,7 +16,7 @@ df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='pla
 
 # Config
 st.set_page_config(page_title="Football Market Value", layout="wide")
-st.sidebar.title("⚽ Navigation")
+st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026", "Club Market Value Analysis"])
 
 import streamlit as st
@@ -24,7 +24,7 @@ import pandas as pd
 
 # ---------------------- Club Market Value Analysis Page ----------------------
 if page == "Club Market Value Analysis":
-    st.markdown("<h1 style='text-align: center; color: #D35400;'>📊 Market Value Analysis by Club</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #D35400;'>Market Value Analysis by Club</h1>", unsafe_allow_html=True)
 
     # Select club
     clubs = df['current_club_name'].dropna().unique()
