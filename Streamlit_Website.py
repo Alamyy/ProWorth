@@ -20,9 +20,19 @@ st.set_page_config(page_title="Football Data Analysis", layout="centered")
 
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
-##--------------------------------------------------------------------------------
 
-# Home page content
+# ---------------------- Video Page ----------------------
+if page == "Video Page":
+    st.markdown("<h1 style='text-align: center; color: #2E86C1;'>Football Analysis Video</h1>", unsafe_allow_html=True)
+
+    # Button to start the video
+    if st.button("Start"):
+        # URL to the video on GitHub (make sure it's a direct link to the video file)
+        video_url = "https://github.com/Alamyy/ProWorth/raw/refs/heads/main/Football%20in%20slow%20motion%20-%20social%20media%20video%20ad%20-%20stock%20video.mp4"  # Replace with your actual video URL
+        st.video(video_url)
+    else:
+        st.info("Press the 'Start' button to watch the video.")
+# Home page content ----------------------------------------------
 if page == "Home":
     st.markdown("<div class='content'>", unsafe_allow_html=True)
     st.markdown("<h1 style='color: #D35400;'>Welcome to the Football Data Analysis </h1>", unsafe_allow_html=True)
