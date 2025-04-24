@@ -18,35 +18,27 @@ df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='pla
 # Config
 st.set_page_config(page_title="Football Data Analysis", layout="centered")
 
-# Initialize session state to store the current page (if it doesn't exist)
-if 'page' not in st.session_state:
-    st.session_state.page = "Home"
-
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 
+
+# -------------------- Home Page --------------------
+if 'page' not in st.session_state:
+    st.session_state.page = "Home"  # Initialize page state
+
+# Add a dropdown or radio button for page selection
+page = st.radio("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
+
+# Update the session state with the selected page
 st.session_state.page = page
-# -------------------- Home Page --------------------
-# -------------------- Home Page --------------------
+
+# -------------------- Home Page Content --------------------
 if st.session_state.page == "Home":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis 🏆</h1>", unsafe_allow_html=True)
     
     st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
     
     st.markdown("<p style='text-align: center;'>This application allows you to analyze football data with various tools. Choose one of the options below to get started:</p>", unsafe_allow_html=True)
-
-    # Buttons to navigate to other pages
-    if st.button("Go to Player Analyzer"):
-        st.session_state.page = "Player Analyzer"  # Update the page in session state
-        st.experimental_rerun()  # Manually trigger a rerun to update the page content
-
-    if st.button("Go to Club Market Value Analysis"):
-        st.session_state.page = "Club Market Value Analysis"
-        st.experimental_rerun()  # Manually trigger a rerun to update the page content
-
-    if st.button("Go to Top Market Values 2026"):
-        st.session_state.page = "Top Market Values 2026"
-        st.experimental_rerun()  # Manually trigger a rerun to update the page content
 
 # ---------------------- Club Market Value Analysis Page ----------------------
 if page == "Club Market Value Analysis":
