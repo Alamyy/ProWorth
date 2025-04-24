@@ -16,7 +16,7 @@ df = pd.merge(new_predictions, players, on='player_id', how='left')
 df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='player_id', how='left')
 
 # Config
-st.set_page_config(page_title="Football Data Analysis", layout="centered")
+st.set_page_config(page_title="ProWorth", page_icon="💸")
 
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
