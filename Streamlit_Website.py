@@ -10,7 +10,7 @@ more_info = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/
 
 # Merge datasets
 df = pd.merge(new_predictions, players, on='player_id', how='left')
-df = df.merge(more_info[['player_id', 'image_url']], on='player_id', how='left')
+df = df.merge(more_info[['player_id', 'image_url','current_club_name']], on='player_id', how='left')
 
 # Config
 st.set_page_config(page_title="Football Market Value", layout="wide")
