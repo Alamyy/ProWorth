@@ -22,16 +22,6 @@ st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 
 
-# Add the navigation bar with links
-st.markdown("""
-    <div class="navbar">
-        <a href="#" class="active" id="home-link">Home</a>
-        <a href="#" id="player-analyzer-link">Player Analyzer</a>
-        <a href="#" id="club-market-value-link">Club Market Value Analysis</a>
-        <a href="#" id="top-market-values-link">Top Market Values 2026</a>
-    </div>
-""", unsafe_allow_html=True)
-
 # -------------------- Page Navigation --------------------
 if 'page' not in st.session_state:
     st.session_state.page = "Home"  # Initialize page state
