@@ -101,15 +101,6 @@ if page == "Club Market Value Analysis":
         st.markdown(f"- **Players with Decreased Value**: {decrease_count}")
         st.markdown(f"- **Players with No Change in Value**: {no_change_count}")
 
-        # Optional: Show a pie chart for market value trends
-        trend_counts = pd.DataFrame({
-            'Trend': ['Increase', 'Decrease', 'No Change'],
-            'Count': [increase_count, decrease_count, no_change_count]
-        })
-
-        st.write("### 📊 Market Value Trend Distribution")
-        st.bar_chart(trend_counts.set_index('Trend')['Count'])
-
     else:
         st.info("👈 Please select a club to get started.")
 
