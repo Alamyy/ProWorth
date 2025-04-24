@@ -48,29 +48,29 @@ if player_name_input != "-- Select a Player --":
         ]
 
         # Plot
-        plt.style.use("seaborn-darkgrid")
+        plt.style.use("ggplot")
         fig, ax = plt.subplots(figsize=(12, 6))
 
         # Actual values
-        ax.plot(years[:-1], values[:-1], marker='o', linestyle='-', color='#1f77b4', linewidth=3, markersize=8, label="Actual")
+        ax.plot(years[:-1], values[:-1], marker='o', linestyle='-', color='dodgerblue', linewidth=3, markersize=8, label="Actual")
 
         # Prediction
-        ax.plot(years[-2:], values[-2:], linestyle='--', color='#FF7F0E', linewidth=3, label="Prediction")
-        ax.scatter(years[-1], values[-1], color='#FF7F0E', s=120, marker='*', edgecolor='black', zorder=5)
+        ax.plot(years[-2:], values[-2:], linestyle='--', color='orange', linewidth=3, label="Prediction")
+        ax.scatter(years[-1], values[-1], color='orange', s=150, marker='*', edgecolor='black', zorder=5)
 
         # Value labels
         for x, y in zip(years, values):
             label = f"€{y/1e6:.1f}M"
-            ax.text(x, y + 0.02 * max(values), label, fontsize=11, ha='center', fontweight='bold', color='black')
+            ax.text(x, y + 0.03 * max(values), label, fontsize=11, ha='center', fontweight='bold', color='black')
 
-        ax.set_title(f"Market Value Over Time – {player_name}", fontsize=18, fontweight='bold')
+        ax.set_title(f"📈 Market Value Over Time – {player_name}", fontsize=20, fontweight='bold')
         ax.set_xlabel("Year", fontsize=14)
         ax.set_ylabel("Market Value (€)", fontsize=14)
         ax.set_xticks(years)
         ax.set_yticklabels([f"€{x/1e6:.1f}M" for x in ax.get_yticks()])
         ax.tick_params(axis='both', labelsize=12)
-        ax.grid(True, linestyle='--', alpha=0.3)
-        ax.legend()
+        ax.legend(loc='upper left', fontsize=12)
+        ax.grid(True, linestyle='--', alpha=0.4)
 
         # Show plot
         st.pyplot(fig)
