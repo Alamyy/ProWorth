@@ -101,8 +101,4 @@ elif page == "Top Market Values 2026":
     # Reorder columns to place Current Value before Predicted Value
     top_players_display = top_players_display[['Player', 'Club', 'Position', 'Current Value (€)', 'Predicted Value (€)']]
     
-    # Create clickable links for player names
-    top_players_display['Player'] = top_players_display['Player'].apply(lambda x: f"<a href='/?page=Player%20Analyzer&player={x}'>{x}</a>")
-        # Create clickable links for player names
-    
     st.markdown(top_players_display.to_html(escape=False), unsafe_allow_html=True)
