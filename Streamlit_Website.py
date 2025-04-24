@@ -22,58 +22,6 @@ st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 ##--------------------------------------------------------------------------------
 
-import streamlit as st
-
-# Set the video URL (raw link from GitHub)
-video_url = "https://github.com/Alamyy/ProWorth/raw/refs/heads/main/Football%20in%20slow%20motion%20-%20social%20media%20video%20ad%20-%20stock%20video.mp4"
-
-# Function to display the intro page (video only)
-def display_intro_page():
-    # Set the video as background using HTML and CSS
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            position: relative;
-            overflow: hidden;
-            height: 100vh;
-        }}
-        .video-background {{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }}
-        </style>
-        <div class="video-background">
-            <video width="100%" height="100%" autoplay muted loop>
-                <source src="{video_url}" type="video/mp4">
-            </video>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Display content (no button, just a clean background video)
-    st.markdown(
-        """
-        <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
-            <h1>Welcome to the Football Data Analysis</h1>
-        </div>
-        """, unsafe_allow_html=True)
-
-# Sidebar navigation
-page = st.sidebar.selectbox("Choose a page", ["Intro", "Home"])
-
-if page == "Intro":
-    display_intro_page()
-else:
-    st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center;'>This application allows you to analyze football data with various tools. Choose one of the options in the navigation bar to get started:</p>", unsafe_allow_html=True)
-
-
 # Home page content
 if page == "Home":
     st.markdown("<div class='content'>", unsafe_allow_html=True)
