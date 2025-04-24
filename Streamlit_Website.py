@@ -20,13 +20,14 @@ st.set_page_config(page_title="Football Data Analysis", layout="centered")
 
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
+##--------------------------------------------------------------------------------
 
 import streamlit as st
 
 # Set the video URL (raw link from GitHub)
 video_url = "https://github.com/Alamyy/ProWorth/raw/refs/heads/main/Football%20in%20slow%20motion%20-%20social%20media%20video%20ad%20-%20stock%20video.mp4"
 
-# Function to display the intro page (video + welcome message)
+# Function to display the intro page (video only)
 def display_intro_page():
     # Set the video as background using HTML and CSS
     st.markdown(
@@ -46,57 +47,31 @@ def display_intro_page():
             object-fit: cover;
             z-index: -1;
         }}
-        .content {{
-            position: relative;
-            z-index: 1;
-            color: white;
-            text-align: center;
-            padding-top: 50px;
-        }}
-        .button {{
-            position: relative;
-            z-index: 1;
-            background-color: #D35400;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }}
         </style>
-        <video class="video-background" autoplay muted loop>
-            <source src="{video_url}" type="video/mp4">
-        </video>
-        """,
-        unsafe_allow_html=True
-    )
+        <div class="video-background">
+            <video width="100%" height="100%" autoplay muted loop>
+                <source src="{video_url}" type="video/mp4">
+            </video>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Display content (no button, just a clean background video)
+    st.markdown(
+        """
+        <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
+            <h1>Welcome to the Football Data Analysis</h1>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # Welcome message
-    st.markdown("<div class='content'>", unsafe_allow_html=True)
-    st.markdown("<h1>Welcome to the Football Data Analysis!</h1>", unsafe_allow_html=True)
-    st.markdown("<p>Enjoy analyzing football data with us. Click below to get started!</p>", unsafe_allow_html=True)
+# Sidebar navigation
+page = st.sidebar.selectbox("Choose a page", ["Intro", "Home"])
 
-    # Button to go to the Home page
-    if st.button("Go to Home"):
-        st.session_state.page = "Home"
-    st.markdown("</div>", unsafe_allow_html=True)
-
-# Function to display the home page content
-def display_home():
-    st.markdown("<h1>Home Page</h1>")
-    st.markdown("<p>This is the main page of the Football Data Analysis app. Choose from the options in the navigation bar to get started!</p>")
-
-# Streamlit page routing logic
-if "page" not in st.session_state:
-    st.session_state.page = "Intro"
-
-# Conditional page rendering based on session state
-if st.session_state.page == "Intro":
+if page == "Intro":
     display_intro_page()
-elif st.session_state.page == "Home":
-    display_home()
+else:
+    st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>This application allows you to analyze football data with various tools. Choose one of the options in the navigation bar to get started:</p>", unsafe_allow_html=True)
 
 
 # Home page content
