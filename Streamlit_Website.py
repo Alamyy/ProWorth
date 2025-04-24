@@ -6,9 +6,9 @@ from io import BytesIO
 import requests
 
 # Load data
-new_predictions = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/predicted_market_values_2026.csv")
-players = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/merged_df.csv")
-more_info = pd.read_csv("https://raw.githubusercontent.com/Alamyy/ProWorth/refs/heads/main/players.csv")
+new_predictions = pd.read_csv("D:/Football Project/ProWorth/predicted_market_values_2026.csv")
+players = pd.read_csv("D:/Football Project/ProWorth/merged_df_2026.csv")
+more_info = pd.read_csv("D:/Football Project/Datasets/players.csv")
 
 # Merge datasets
 df = pd.merge(new_predictions, players, on='player_id', how='left')
@@ -48,7 +48,7 @@ if player_name_input != "-- Select a Player --":
         ]
 
         # Plot
-        plt.style.use("ggplot")  # Use a matplotlib style, e.g., 'ggplot'
+        plt.style.use("seaborn-darkgrid")
         fig, ax = plt.subplots(figsize=(12, 6))
 
         # Actual values
