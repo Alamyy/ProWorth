@@ -21,34 +21,6 @@ st.set_page_config(page_title="Football Data Analysis", layout="centered")
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 
-# Custom HTML & CSS for the navigation bar
-st.markdown("""
-    <style>
-        .navbar {
-            background-color: #2c3e50;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            padding: 10px 0;
-        }
-        .navbar a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        .navbar a:hover {
-            background-color: #D35400;
-            color: white;
-        }
-        .navbar a.active {
-            background-color: #D35400;
-            color: white;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 # Add the navigation bar with links
 st.markdown("""
