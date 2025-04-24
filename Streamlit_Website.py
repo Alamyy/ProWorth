@@ -21,23 +21,50 @@ st.set_page_config(page_title="Football Data Analysis", layout="centered")
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
 
-#-------------------------------
-# Set the background video using CSS
+import streamlit as st
+
+# Set the video URL (raw link from GitHub)
 video_url = "https://github.com/Alamyy/ProWorth/raw/refs/heads/main/Football%20in%20slow%20motion%20-%20social%20media%20video%20ad%20-%20stock%20video.mp4"
 
+# Set the video as background using HTML and CSS
 st.markdown(
     f"""
     <style>
     .stApp {{
-        background: url("{video_url}") no-repeat center center fixed;
+        position: relative;
+        overflow: hidden;
+    }}
+    .stApp::before {{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background: url("{video_url}");
         background-size: cover;
+        background-position: center;
+        opacity: 0.7;
+    }}
+    video {{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
     }}
     </style>
-    """, 
+    <video autoplay muted loop>
+        <source src="{video_url}" type="video/mp4">
+    </video>
+    """,
     unsafe_allow_html=True
 )
 
-# Your home page content
+# Home page content
 if page == "Home":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis </h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
