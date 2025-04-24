@@ -21,8 +21,12 @@ page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026
 if page == "Player Analyzer":
     st.markdown("<h1 style='text-align: center; color: #2E86C1;'>⚽ Football Player Market Value Analyzer</h1>", unsafe_allow_html=True)
 
-    player_names = df['name_x'].dropna().unique()
-    player_name_input = st.selectbox("🔍 Search for a Player", ["-- Select a Player --"] + sorted(player_names))
+    # Check if a player was selected from the session state
+    if 'selected_player' in st.session_state:
+        player_name_input = st.session_state.selected_player
+        st.session_state.selected_player = None  # Reset after using the name
+    else:
+        player_name_input = "-- Select a Player --"
 
     if player_name_input != "-- Select a Player --":
         player_data = df[df['name_x'] == player_name_input]
@@ -75,7 +79,6 @@ if page == "Player Analyzer":
             st.markdown(f"- **Highest Market Value:** €{player_info['highest_market_value_in_eur'] / 1e6:.2f}M")
         else:
             st.error("❌ Player not found.")
-
     else:
         st.info("👈 Please select a player to get started.")
 
@@ -84,15 +87,29 @@ elif page == "Top Market Values 2026":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>🔥 Top 20 Players by Predicted Market Value (2026)</h1>", unsafe_allow_html=True)
     
     top_players = df.sort_values(by="predicted_value_2026", ascending=False).dropna(subset=["name_x"]).head(20)
-    selected_top_player = st.selectbox("🎖️ Choose a Top Player", top_players['name_x'])
-
-    st.dataframe(top_players[['name_x', 'current_club_name', 'sub_position', 'predicted_value_2026']].rename(columns={
+    
+    # Create the table and make player names clickable
+    top_players_display = top_players[['name_x', 'current_club_name', 'sub_position', 'predicted_value_2026']].rename(columns={
         'name_x': 'Player',
         'current_club_name': 'Club',
         'sub_position': 'Position',
         'predicted_value_2026': 'Predicted Value (€)'
-    }).style.format({'Predicted Value (€)': '€{:,.0f}'}), use_container_width=True)
-
-    if selected_top_player:
-        st.markdown("---")
-        st.success(f"You selected **{selected_top_player}** — Head to the 'Player Analyzer' page for full details.")
+    })
+    top_players_display['Player'] = top_players_display['Player'].apply(lambda x: f"<a href='#' onclick='set_selected_player(\"{x}\")'>{x}</a>")
+    
+    st.markdown(top_players_display.to_html(escape=False), unsafe_allow_html=True)
+    
+    # Update the session state when a player is clicked
+    if 'selected_player' in st.session_state:
+        st.session_state.selected_player = selected_player
+    
+    # Add a hidden Javascript function to handle the player name click
+    st.markdown("""
+        <script>
+        function set_selected_player(player_name) {
+            const player_name_input = document.getElementById('player_name_input');
+            player_name_input.value = player_name;
+            window.location.href = "#";
+        }
+        </script>
+    """, unsafe_allow_html=True)
