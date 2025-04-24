@@ -134,7 +134,7 @@ if page == "Player Analyzer":
             ax.scatter(years[-1], values[-1], color='orange', s=150, marker='*', edgecolor='black')
             for x, y in zip(years, values):
                 ax.text(x, y + 0.03 * max(values), f"€{y/1e6:.1f}M", ha='center')
-            ax.set_title(f"📈 Market Value Over Time – {player_name}")
+            ax.set_title(f" Market Value Over Time – {player_name}")
             ax.set_xlabel("Year"); ax.set_ylabel("Market Value (€)")
             ax.set_xticks(years)
             ax.set_yticklabels([f"€{x/1e6:.1f}M" for x in ax.get_yticks()])
