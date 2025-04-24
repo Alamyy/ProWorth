@@ -100,5 +100,6 @@ elif page == "Top Market Values 2026":
     
     # Reorder columns to place Current Value before Predicted Value
     top_players_display = top_players_display[['Player', 'Club', 'Position', 'Current Value (€)', 'Predicted Value (€)']]
+    top_players_display = top_players_display.reset_index(drop=True)
     
     st.markdown(top_players_display.to_html(escape=False), unsafe_allow_html=True)
