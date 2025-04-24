@@ -19,10 +19,6 @@ st.set_page_config(page_title="Football Market Value", layout="wide")
 st.sidebar.title("⚽ Navigation")
 page = st.sidebar.selectbox("Go to", ["Player Analyzer", "Top Market Values 2026", "Club Market Value Analysis"])
 
-
-import streamlit as st
-import pandas as pd
-
 # ---------------------- Club Market Value Analysis Page ----------------------
 if page == "Club Market Value Analysis":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>📊 Market Value Analysis by Club</h1>", unsafe_allow_html=True)
@@ -36,16 +32,26 @@ if page == "Club Market Value Analysis":
         club_logo = logo_clubs[logo_clubs['current_club_name'] == club_selected]['logo_url'].values
         if club_logo.size > 0:
             club_logo_url = club_logo[0]
-            st.image(club_logo_url, width=100)  # Display the club logo
         else:
-            st.warning("Logo not found for the selected club.")
+            club_logo_url = None
 
         # Filter players from the selected club
         club_players = df[df['current_club_name'] == club_selected]
 
-        # Select sub_position (optional filter)
-        sub_positions = club_players['sub_position'].dropna().unique()
-        sub_position_selected = st.selectbox("Select a Position", ["-- Select a Position --"] + sorted(sub_positions))
+        # Create columns layout
+        col1, col2 = st.columns([1, 3])
+
+        with col1:
+            # Display club logo if available
+            if club_logo_url:
+                st.image(club_logo_url, width=100)  # Display the club logo
+            else:
+                st.warning("Logo not found for the selected club.")
+
+        with col2:
+            # Select sub_position (optional filter)
+            sub_positions = club_players['sub_position'].dropna().unique()
+            sub_position_selected = st.selectbox("Select a Position", ["-- Select a Position --"] + sorted(sub_positions))
 
         # Filter by sub_position if selected
         if sub_position_selected != "-- Select a Position --":
@@ -93,6 +99,7 @@ if page == "Club Market Value Analysis":
 
     else:
         st.info("👈 Please select a club to get started.")
+
 
 # ---------------------- Player Analyzer Page ----------------------
 if page == "Player Analyzer":
