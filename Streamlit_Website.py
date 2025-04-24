@@ -20,7 +20,24 @@ st.set_page_config(page_title="Football Data Analysis", layout="centered")
 
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox("Select a Page", ["Home", "Player Analyzer", "Club Market Value Analysis", "Top Market Values 2026"])
-# ---------------------- Home Page ----------------------
+
+#-------------------------------
+# Set the background video using CSS
+video_url = "https://github.com/Alamyy/ProWorth/raw/refs/heads/main/Football%20in%20slow%20motion%20-%20social%20media%20video%20ad%20-%20stock%20video.mp4"
+
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background: url("{video_url}") no-repeat center center fixed;
+        background-size: cover;
+    }}
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
+# Your home page content
 if page == "Home":
     st.markdown("<h1 style='text-align: center; color: #D35400;'>Welcome to the Football Data Analysis </h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>Explore Football Data in Detail</h3>", unsafe_allow_html=True)
